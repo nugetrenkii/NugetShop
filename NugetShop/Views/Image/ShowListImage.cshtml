@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NugetShop.Models.Image>
+
+@{
+    ViewData["Title"] = "ShowListImage";
+}
+
+<h1>ShowListImage</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Path)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageID)
+            </td>
+            <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Path)" style="width: 20%">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.ImageID  }) |
+                    @Html.ActionLink("Details", "Details", new {  id=item.ImageID  }) |
+                    @Html.ActionLink("Delete", "Delete", new {  id=item.ImageID  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

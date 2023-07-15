@@ -1,0 +1,64 @@
+﻿@model IEnumerable<NugetShop.Models.Product>
+<table class="table">
+    <tbody>
+
+        <div class="container-fluid pt-5">
+            <div class="text-center mb-4">
+                <h2 class="section-title px-5" style="font-weight: bold;"><span class="px-2">Sản phẩm mới nhất</span></h2>
+            </div>
+            <div class="row px-xl-5 pb-3">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                        <div class="card product-item border-0 mb-4">
+                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                <img class="img-fluid w-100" src="@Url.Content(item.Image.Path)">
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                <h6 class="text-truncate mb-3"> @Html.ActionLink(item.ProductName, "Details", new {  id=item.ProductID })</h6>
+                                <div class="d-flex justify-content-center">
+                                    <h6> @string.Format("{0:N0}đ", item.Price)</h6>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="" class="btn btn-sm text-dark p-0"><i class="fa fa-eye text-primary mr-1"></i>Xem thông tin</a>
+                                <a href="" class="btn btn-sm text-dark p-0">
+                                    <i class="fa fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ hàng
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="container-fluid pt-5">
+            <div class="text-center mb-4">
+                <h2 class="section-title px-5" style="font-weight: bold;"><span class="px-2">Sản phẩm bán chạy</span></h2>
+            </div>
+            <div class="row px-xl-5 pb-3">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1" ng-repeat="hm in home">
+                        <div class="card product-item border-0 mb-4">
+                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                <img class="img-fluid w-100" src="@Html.DisplayFor(modelItem => item.Image.Path)">
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                <h6 class="text-truncate mb-3">@Html.ActionLink(item.ProductName, "Details", new {  id=item.ProductID })</h6>
+                                <div class="d-flex justify-content-center">
+                                    <h6>@string.Format("{0:N0}đ", item.Price)</h6>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="" class="btn btn-sm text-dark p-0"><i class="fa fa-eye text-primary mr-1"></i>Xem thông tin</a>
+                                <a href="" class="btn btn-sm text-dark p-0">
+                                    <i class="fa fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ hàng
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </tbody>
+</table>

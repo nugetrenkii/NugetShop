@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NugetShop.Models.UserRole>
+
+@{
+    ViewData["Title"] = "ShowListUserRole";
+}
+
+<h1>ShowListUserRole</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserRoleID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserRoleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new {id=item.UserRoleID  }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.UserRoleID }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.UserRoleID  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

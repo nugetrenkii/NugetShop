@@ -1,0 +1,85 @@
+﻿<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Ảnh</label>
+            <input id="img_view" type="url" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Tên sản phẩm</label>
+            <input type="text" class="form-control" ng-model="tensp">
+        </div>
+        <div class="form-group">
+            <label>Giá bán</label>
+            <input type="text" class="form-control" ng-model="gia">
+        </div>
+        <div class="form-group">
+            <label>Số lượng tồn</label>
+            <input type="text" class="form-control" ng-model="soluongton">
+        </div>
+        <div class="form-group">
+            <label>Giảm giá</label>
+            <input type="text" class="form-control" ng-model="sale">
+        </div>
+        <div class="form-group">
+            <label class="input-group-text" for="inputGroupSelect01">Size</label>
+            <select class="form-select" id="inputGroupSelect01" ng-model="size">
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="input-group-text" for="inputGroupSelect01">Màu sắc</label>
+            <select class="form-select" id="inputGroupSelect01" ng-model="color">
+                <option value="Đỏ">Đỏ</option>
+                <option value="Trắng">Trắng</option>
+                <option value="Xanh">Xanh</option>
+                <option value="Vàng">Vàng</option>
+                <option value="Đen">Đen</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="input-group-text" for="inputGroupSelect01">Thể loại</label>
+            <select class="form-select" id="inputGroupSelect01" ng-model="type">
+                <option value="Áo Hoodie">Áo Hoodie</option>
+                <option value="Áo Phông">Áo Phông</option>
+                <option value="Quần Đùi">Quần Đùi</option>
+            </select>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary" ng-click="addSP()">Add New</button>
+        <button type="submit" class="btn btn-primary" ng-click="update()">Update</button>
+    </form>
+</div>
+<div>
+    <table class="table">
+        <tr style="font-weight: bold">
+            <td>Ảnh</td>
+            <td>Tên sản phẩm</td>
+            <td>Giá bán</td>
+            <td>Số lượng tồn</td>
+            <td>Giảm giá</td>
+            <td>Size</td>
+            <td>Màu sắc</td>
+            <td>Thể loại</td>
+            <td>Hành động</td>
+        </tr>
+        <tbody ng-repeat="sp in lstsanpham">
+            <tr>
+                <td style="width: 25%;"><img src="{{sp.img}}" alt="" width="50%"></td>
+                <td>{{sp.tensp}}</td>
+                <td>{{sp.gia}}vnđ</td>
+                <td>{{sp.soluongton}}</td>
+                <td>{{sp.sale}}vnđ</td>
+                <td>{{sp.size}}</td>
+                <td>{{sp.color}}</td>
+                <td>{{sp.type}}</td>
+                <td>
+                    <button ng-click="detail(sp.id)">Chi tiết</button>
+                    <button ng-click="delete(sp.id)">Xóa</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

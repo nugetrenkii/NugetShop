@@ -1,0 +1,170 @@
+﻿@model IEnumerable<NugetShop.Models.CartDetail>
+@{
+    ViewData["Title"] = "ShowCartUser";
+    var tongtien = ViewBag.TongTien;
+    decimal ship = 0;
+
+}
+
+@if (TempData["bug"] != null)
+{
+    <div class="alert alert-danger">@TempData["bug"]</div>
+}
+@if (TempData["quantityCart"] != null)
+{
+    <div class="alert alert-danger">@TempData["quantityCart"]</div>
+}
+<div class="container py-5">
+    <div class="row d-flex justify-content-center my-4">
+        
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    <h5 class="mb-0">Giỏ hàng</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Single item -->
+                    <div class="row" ng-repeat="gh in lstgh">
+                        @foreach (var item in Model)
+                        {
+                        <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                            <!-- Image -->
+                            <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                    <img src=" @Html.DisplayFor(modelItem => item.Products.Image.Path)" class="w-100" alt="" />
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                </a>
+                            </div>
+                            <!-- Image -->
+                        </div>
+                        <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                            <!-- Data -->
+                            <p class="mb-2">     <a class="linksp">  @Html.ActionLink(item.Products.ProductName, "Details","Product", new { id=item.ProductID })</a> <br></p>
+                                <p>Màu:  @Html.DisplayFor(modelItem => item.Products.Colors.ColorName)</p>
+                                <p>Size:  @Html.DisplayFor(modelItem => item.Products.Size.SizeName)</p>
+                            <button type="submit" class="btn btn-secondary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                                    title="Remove item" style="color: black">
+                                    
+                                        <i class="fas">
+                                            <img src="~/img/icons8-trash-can-30.png" width="20px" height="30%"
+                                             alt="">
+                                        @Html.ActionLink("Delete","DeleteCart","Cart",new {id=item.CartDetailID} )
+                                        </i>                                                               
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+                                    title="Move to the wish list">
+                                <i class="fas">
+                                    <img src="~/img/icons8-favorite-64.png" width="20px" height="30%"
+                                         alt="">
+                                </i>
+                            </button>
+                            <!-- Data -->
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                            <!-- Quantity -->
+                            <form method="post" asp-action="UpdateCart" asp-controller="Cart">
+                            <div class="d-flex mb-4" style="max-width: 300px">
+                                <div class="form-outline">
+                                            <input id="form1" type="number" min="1" name="quantity" value="@item.Quantity" data-product-id="@item.ProductID" oninput="handleInput(event)"
+                                               class="form-control"   />
+                                    <label class="form-label" for="form1">Số lượng</label>
+                                </div>
+                            </div>
+                            </form>
+                            <!-- Quantity -->
+                            <!-- Price -->
+                            <p class="text-start text-md-center">
+                                    <strong>@((item.Price).ToString("N0")) đồng</strong>
+                            </p>
+                            <!-- Price -->
+                        </div>
+                        }
+                    </div>
+
+                    <hr class="my-4" />
+
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p><strong>Thời gian giao hàng dự kiến</strong></p>
+                    <p class="mb-0">01.01.2023 - 20.01.2023</p>
+                </div>
+            </div>
+            <div class="card mb-4 mb-lg-0">
+                <div class="card-body">
+                    <p><strong>Chúng tôi chấp nhận</strong></p>
+                    <img class="me-2" width="45px"
+                         src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                         alt="Visa" />
+                    <img class="me-2" width="45px"
+                         src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                         alt="American Express" />
+                    <img class="me-2" width="45px"
+                         src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                         alt="Mastercard" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" ng-repeat="gh in lstgh">
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    <h5 class="mb-0">Tổng quát</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                            Tạm tính
+                            <span>@tongtien.ToString("N0")vnđ</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            Phí vận chuyển
+                            <span>Miễn phí</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                            <div>
+                                <strong>Tổng cộng</strong>
+                                <strong>
+                                    <p class="mb-0">(Đã tính cả thuế VAT)</p>
+                                </strong>
+                            </div>
+                            <span><strong>@tongtien.ToString("N0") vnđ</strong></span>
+                        </li>
+                    </ul>
+                    @if(tongtien == 0){
+                        <a  type="button" class="btn btn-secondary btn-lg btn-block">
+                            Không thể thanh toán
+                        </a>
+                    }else{
+                    <a asp-action="CheckOut" asp-controller="Cart" type="button" class="btn btn-secondary btn-lg btn-block">
+                        Thanh toán
+                    </a>
+                    }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+         function handleInput(event) {
+            const input = event.target; // Lấy đối tượng input được kích hoạt sự kiện
+            const value = input.value;
+            //const productId = event.dataset.productId;
+            var productId = event.target.getAttribute("data-product-id");
+            $.ajax({
+              url: '/Cart/UpdateCart',
+              type: 'POST',
+              data: { idsp: productId, quantity: value },
+              success: function (result) {
+                window.location.href = '@Url.Action("ShowListCart", "Cart")';
+              }
+            })}
+    </script>
+}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="container text-center">
+    <h1>Quản trị</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên bảng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td><a asp-controller="Color" asp-area="" asp-action="ShowListColor">Color</a></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td><a asp-controller="Size" asp-area="" asp-action="ShowListSize">Size</a></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td><a asp-controller="Image" asp-area="" asp-action="ShowListImage">Image</a></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td><a asp-controller="Product" asp-area="" asp-action="ShowListProduct">Product</a></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td><a asp-controller="UserRole" asp-area="" asp-action="ShowListUserRole">User Role</a></td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td><a asp-controller="User" asp-area="" asp-action="ShowListUser">User</a></td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td><a asp-controller="Cart" asp-area="" asp-action="ViewBill">Bill</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

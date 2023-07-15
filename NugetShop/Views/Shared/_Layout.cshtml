@@ -1,0 +1,190 @@
+﻿@using NugetShop.Services;
+@{
+    var acc = Context.Session.GetString("acc");
+    var cart = Context.Session.Get("Cart");
+    var role = Context.Session.GetString("role");
+    var products = SessionServices.GetObjFromSesssion(Context.Session, "Cart");
+    // tính tổng số lượng sản phẩm trong giỏ hàng
+    var totalQuantity = products.Count();
+    //ViewBag.TotalQuantity = totalQuantity;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NugetShop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/NugetShop.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0" href="#home">
+                        <img src="~/img/icons8-cat-profile-100.png" style="" width="40%" alt=""
+                             loading="lazy" />
+                    </a>
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-weight: bold">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="Product">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="GioiThieu" asp-controller="Home">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="SanPham" asp-controller="Product">Sản phẩm</a>
+                        </li>
+                        @if (acc != null && role == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Admin" asp-controller="Home">Quản trị</a>
+                            </li>
+                        }
+                    </ul>
+                    <form class="d-flex" role="search" style="margin-right:100px; color: black;">
+                        <input class="form-control me-2" type="search" name="searchString" placeholder="Search" aria-label="Search"
+                               style="padding-left: 200px;">
+                        <button class="btn btn-outline-dark" type="submit" style="color: white; ">Search</button>
+                    </form>
+
+                    <!-- Left links -->
+                </div>
+
+                <!-- Collapsible wrapper -->
+                <!-- Right elements -->
+                <div class="d-grid gap-2 d-md-block">
+                    @if (acc != null)
+                    {
+                        <a class="btn btn-primary" style="background-color:white;color:black;border:none; margin-right: 5px">@acc.ToString()</a>
+
+                    }
+                </div>
+                <div class="d-flex align-items-center">
+                    <!-- Icon -->
+                    @if (acc != null)
+                    {
+                        <a class="link-secondary me-3" asp-action="ShowListCart" asp-controller="Cart">
+
+                            <img src="~/img/icons8-shopping-cart-30.png" alt="">
+                            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+
+                        </a>
+                    }
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            <img src="~/img/icons8-cat-profile-30.png" alt="">
+                        </button>
+                        <ul class="dropdown-menu" style="background-color: gray;">
+                            <li><a class="dropdown-item" asp-action="Logout" asp-controller="User">Đăng xuất</a></li>
+                            <li><a class="dropdown-item" asp-action="GioiThieu" asp-controller="Home">Giới thiệu</a></li>
+
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-dark"
+                            style="margin-left: 10px; padding: 10px 20px; font-weight: bold;">
+                        <a asp-action="Login" asp-controller="User"
+                           style="text-decoration: none; color: #fff;">Login</a>
+                    </button>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="text-center text-lg-start bg-secondary text-light">
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom bg-secondary">
+        </section>
+        <section>
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h4 class="text-uppercase fw-bold mb-4" style="margin-left: -20px;">
+                            <i class="fa fa-gem me-3 text-secondary"></i>TOKAGO
+                        </h4>
+                        <p>
+                            Về chúng tôi
+                        </p>
+                        <p>
+                            <a href="gioithieu.html" class="text-reset">Giới thiệu</a>
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Sản phẩm
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Áo</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Quần</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Váy</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Liên kết nhanh
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Cài đặt</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Đặt hàng</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Trợ giúp</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4" style="margin-left: 20px;">Liên hệ</h6>
+                        <p><i class="fa me-3 text-secondary"></i> Nam Từ Liêm, Hà Nội</p>
+                        <p>
+                            <i class="fa me-3 text-secondary"></i>
+                            tokago@gmail.com
+                        </p>
+                        <p><i class="fa me-3 text-secondary"></i> 0398204444</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

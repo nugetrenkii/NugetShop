@@ -1,0 +1,65 @@
+﻿@model IEnumerable<NugetShop.Models.User>
+
+@{
+    ViewData["Title"] = "ShowListUser";
+}
+
+<h1>ShowListUser</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserRoleID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserRoles.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                    @(item.Status == 0 ? "Hoạt động" : "Không hoạt động")
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.UserID  }) |
+                    @Html.ActionLink("Details", "Details", new {  id=item.UserID  }) |
+                    @Html.ActionLink("Delete", "Delete", new {  id=item.UserID  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

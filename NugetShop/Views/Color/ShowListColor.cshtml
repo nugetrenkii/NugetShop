@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NugetShop.Models.Color>
+
+@{
+    ViewData["Title"] = "ShowListColor";
+}
+
+<h1>ShowListColor</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ColorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ColorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.ColorID  }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ColorID  }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ColorID  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

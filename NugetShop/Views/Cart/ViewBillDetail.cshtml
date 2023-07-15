@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NugetShop.Models.BillDetail>
+
+@{
+    ViewData["Title"] = "ViewBillDetail";
+}
+
+<h1>ViewBillDetail</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Tên sản phẩm
+            </th>
+            <th>
+               Số lượng
+            </th>
+            <th>
+               Giá
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Products.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+@*            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.BillDetailID  }) |
+                    @Html.ActionLink("Details", "Details", new {   id=item.BillDetailID  }) |
+                    @Html.ActionLink("Delete", "Delete", new {   id=item.BillDetailID  })
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>

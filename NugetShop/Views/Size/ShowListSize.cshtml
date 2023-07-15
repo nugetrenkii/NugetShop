@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NugetShop.Models.Size>
+
+@{
+    ViewData["Title"] = "ShowListSize";
+}
+
+<h1>ShowListSize</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SizeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SizeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SizeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SizeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.SizeID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.SizeID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.SizeID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

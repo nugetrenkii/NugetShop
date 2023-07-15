@@ -1,0 +1,71 @@
+﻿@model NugetShop.Models.User;
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1" style="margin-top: 100px; margin-right: 120px;">
+                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng nhập</p>
+                    <form>
+                        @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                            {
+                            @Html.AntiForgeryToken()
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">User Name</label>
+                            @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control", @placeholder = "Account" })
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="form3Example4">Mật khẩu</label>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                        </div>
+                        @if (TempData["AlertMessage"] != null)
+                                {
+                                    <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert">
+                                        @TempData["AlertMessage"]
+                                    </div>
+                                }
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Checkbox -->
+                            <div class="form-check mb-0">
+                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                                <label class="form-check-label" for="form2Example3">
+                                    Ghi nhớ mật khẩu
+                                </label>
+                            </div>
+                            <a href="forgotpw.html" class="text-body">Quên mật khẩu?</a>
+                        </div>
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem;" asp-action="Login" asp-controller="User" value="Login">
+                                Đăng nhập
+                            </button>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">
+                                Bạn không có tài khoản? <a class="link-danger" asp-action="Create" asp-controller="User">Đăng kí tại đây</a>
+                            </p>
+                        </div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(2000).slideUp(500);
+        });
+
+    </script>
+}
+*@
+
+
+
